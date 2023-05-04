@@ -17,21 +17,27 @@ public class Cuenta {
     private int id;
 
     @Column(name = "numeroCuenta")
-    private String numeroCuenta;
+    private int numeroCuenta;
 
     @Column(name = "tipoCuenta")
     private String tipoCuenta;
 
     
-    @Column(name = "saldoInicial")
-    private int saldoInicial;
+    @Column(name = "saldo")
+    private int saldo;
 
     
     @Column(name = "estado")
     private String estado;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "cliente_id")
+    private Cliente cliente;
+    
+
     @OneToMany(mappedBy = "cuenta", cascade = CascadeType.ALL)
     private List<Movimiento> movimientos;
+
 
     
 }
