@@ -40,12 +40,14 @@ public class CuentaService {
     }
 
 
-    public Cuenta buscarPorNumero(Long numeroCuenta) {
-        return null;
+    public Cuenta buscarPorNumero(int numeroCuenta) {
+        return cuentaRepository.buscarPorNumero(numeroCuenta);
     }
 
 
     public List<Movimiento> buscarMovimientosPorNumeroCuenta(Long numeroCuenta) {
         return null;
     }
+
+    
 }

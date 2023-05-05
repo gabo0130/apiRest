@@ -1,6 +1,9 @@
 package com.entity;
 
 import javax.persistence.*;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.*;
 import java.time.LocalDate;
 
@@ -26,9 +29,10 @@ public class Movimiento {
     @Column(name = "valor")
     private int valor;
     
-    @Column(name = "saldo")
-    private int saldo;
-
+    @Column(name = "saldoInicial")
+    private int saldoInicial;
+    
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "cuenta_id")
     private Cuenta cuenta;

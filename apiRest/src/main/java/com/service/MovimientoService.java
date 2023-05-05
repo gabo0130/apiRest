@@ -3,8 +3,11 @@ package com.service;
 import java.util.NoSuchElementException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import com.entity.Movimiento;
 import com.repository.MovimientoRepository;
+
+import java.time.LocalDate;
 import java.util.List;
 
 @Service
@@ -31,6 +34,10 @@ public class MovimientoService {
 
     public Movimiento obtenerMovimientoPorId(Long id) {
         return movimientoRepository.findById(id).orElseThrow(() -> new NoSuchElementException("Movimiento no encontrado"));
+    }
+
+    public List<Movimiento> buscarPorCuentaYRangoDeFechas(int cuentaId, LocalDate fechaInicio, LocalDate fechaFin){
+        return movimientoRepository.buscarPorCuentaYRangoDeFechas(cuentaId,  fechaInicio,  fechaFin);
     }
 
 }

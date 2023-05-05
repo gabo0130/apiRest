@@ -1,18 +1,24 @@
 package com.service;
 
 import java.util.NoSuchElementException;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import com.entity.Cliente;
 import com.entity.Cuenta;
 import com.repository.ClienteRepository;
-import java.util.List;
+import com.repository.CuentaRepository;
 
 @Service
 public class ClienteService {
 
     @Autowired
     private ClienteRepository clienteRepository;
+
+    @Autowired
+    private CuentaRepository cuentaRepository;
 
     public List<Cliente> obtenerTodosLosClientes() {
         return clienteRepository.findAll();
@@ -37,9 +43,11 @@ public class ClienteService {
     public String buscarIdPorNombre(String nombre) {
         return clienteRepository.buscarIdPorNombre(nombre);
     }
-    public List<Cuenta> buscarCuentasPorIdCliente(Long id) {
-        return null;
+    public List<Cuenta> buscarCuentasPorIdCliente(int id) {
+        return cuentaRepository.buscarPorClienteId(id);
     }
+
+    
 
    
 }

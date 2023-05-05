@@ -25,7 +25,7 @@ public class CuentaController {
     
 
     @GetMapping("/{numeroCuenta}")
-    public ResponseEntity<Cuenta> obtenerCuentaPorNumero(@PathVariable Long numeroCuenta) {
+    public ResponseEntity<Cuenta> obtenerCuentaPorNumero(@PathVariable int numeroCuenta) {
         Cuenta cuenta = cuentaService.buscarPorNumero(numeroCuenta);
         return ResponseEntity.ok(cuenta);
     }
