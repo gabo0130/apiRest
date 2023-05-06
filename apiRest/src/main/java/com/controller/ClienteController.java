@@ -59,7 +59,7 @@ public class ClienteController {
         }
         List<Cuenta> cuentas = clienteService.buscarCuentasPorIdCliente(Integer.parseInt(idCliente));
         for (Cuenta cuenta : cuentas) {
-            List<Movimiento> movimientos = MovimientoService.buscarPorCuentaYRangoDeFechas(1, LocalDate.parse(fechaInicio), LocalDate.parse(fechaFin));
+            List<Movimiento> movimientos = MovimientoService.buscarPorCuentaYRangoDeFechas(cuenta.getId(), LocalDate.parse(fechaInicio), LocalDate.parse(fechaFin));
             cuenta.setMovimientos(movimientos);
         }
 
