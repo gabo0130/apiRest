@@ -9,8 +9,9 @@ import com.entity.Cuenta;
 
 public interface CuentaRepository extends JpaRepository<Cuenta, Long> {
     @Query("SELECT c FROM Cuenta c WHERE c.numeroCuenta = :numeroCuenta")
-    Cuenta buscarPorNumero(@Param("numeroCuenta") int numeroCuenta);
+    Cuenta buscarPorNumero(@Param("numeroCuenta") long numeroCuenta);
 
     @Query("SELECT c FROM Cuenta c WHERE c.cliente.id = :clienteId")
-    List<Cuenta> buscarPorClienteId(@Param("clienteId") int clienteId);
+    List<Cuenta> buscarPorClienteId(@Param("clienteId") long clienteId);
+
 }

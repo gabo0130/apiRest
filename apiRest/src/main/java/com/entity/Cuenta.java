@@ -17,17 +17,17 @@ public class Cuenta {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private long id;
 
     @Column(name = "numeroCuenta")
-    private int numeroCuenta;
+    private long numeroCuenta;
 
     @Column(name = "tipoCuenta")
     private String tipoCuenta;
 
     
     @Column(name = "saldo")
-    private int saldo;
+    private long saldo;
 
     
     @Column(name = "estado")

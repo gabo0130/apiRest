@@ -39,7 +39,7 @@ public class MovimientoController {
 
 
     @PostMapping("/{numeroCuenta}")
-    public ResponseEntity<String> realizarMovimiento(@PathVariable int numeroCuenta,@RequestBody Movimiento movimiento) {
+    public ResponseEntity<String> realizarMovimiento(@PathVariable long numeroCuenta,@RequestBody Movimiento movimiento) {
 
         Cuenta cuenta = cuentaService.buscarPorNumero(numeroCuenta);
         if (cuenta!=null) {
@@ -57,6 +57,11 @@ public class MovimientoController {
                     return ResponseEntity.badRequest().body("La cuenta no tiene suficiente saldo.");
                 }
             } else {
+                LocalDate fechaHoy = LocalDate.now();
+                long totalDebitosHoy = movimientoService.obtenerTotalDebitosDelDia(cuenta.getCliente().getId(), fechaHoy);
+                if (totalDebitosHoy + movimiento.getValor() > 1000) {
+                    return ResponseEntity.badRequest().body("Cupo diario Excedido.");
+                }
                 movimientoService.crearMovimiento(movimiento);
                 cuenta.setSaldo(cuenta.getSaldo() +  movimiento.getValor());
                 cuentaRepository.save(cuenta);
@@ -66,5 +71,16 @@ public class MovimientoController {
             return ResponseEntity.badRequest().body("La cuenta no existe.");
         }
     }
+
+    @DeleteMapping("/{numeroCuenta}")
+    public ResponseEntity<Cuenta> eliminarMovimientosPorNumeroCuenta(@PathVariable Long numeroCuenta) {
+        Cuenta cuentaEncontrada = cuentaService.buscarPorNumero(numeroCuenta);
+        if (cuentaEncontrada == null) {
+            return ResponseEntity.notFound().build();
+        }
+        movimientoService.eliminarMovimientosPorNumeroCuenta(cuentaEncontrada.getId());
+        return ResponseEntity.ok(cuentaEncontrada);
+    }
+
 }
 

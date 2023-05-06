@@ -36,14 +36,14 @@ public class ClienteService {
         clienteRepository.deleteById(id);
     }
 
-    public Cliente obtenerClientePorId(Long id) {
+    public Cliente obtenerClientePorId(long id) {
         return clienteRepository.findById(id).orElseThrow(() -> new NoSuchElementException("Cliente no encontrado"));
     }
 
     public String buscarIdPorNombre(String nombre) {
         return clienteRepository.buscarIdPorNombre(nombre);
     }
-    public List<Cuenta> buscarCuentasPorIdCliente(int id) {
+    public List<Cuenta> buscarCuentasPorIdCliente(long id) {
         return cuentaRepository.buscarPorClienteId(id);
     }
 

@@ -13,7 +13,7 @@ public class Persona {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private long id;
     
     @Column(name = "nombre")
     private String nombre;
@@ -22,7 +22,7 @@ public class Persona {
     private char genero;
     
     @Column(name = "edad")
-    private int edad;
+    private long edad;
     
     @Column(name = "identificacion")
     private String identificacion;

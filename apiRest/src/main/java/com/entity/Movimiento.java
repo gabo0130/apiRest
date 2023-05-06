@@ -18,7 +18,7 @@ public class Movimiento {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private long id;
     
     @Column(name = "fecha")
     private LocalDate fecha;
@@ -27,10 +27,10 @@ public class Movimiento {
     private String tipoMovimiento;
     
     @Column(name = "valor")
-    private int valor;
+    private long valor;
     
     @Column(name = "saldoInicial")
-    private int saldoInicial;
+    private long saldoInicial;
     
     @JsonIgnore
     @ManyToOne

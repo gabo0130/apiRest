@@ -25,7 +25,7 @@ public class CuentaController {
     
 
     @GetMapping("/{numeroCuenta}")
-    public ResponseEntity<Cuenta> obtenerCuentaPorNumero(@PathVariable int numeroCuenta) {
+    public ResponseEntity<Cuenta> obtenerCuentaPorNumero(@PathVariable long numeroCuenta) {
         Cuenta cuenta = cuentaService.buscarPorNumero(numeroCuenta);
         return ResponseEntity.ok(cuenta);
     }
@@ -60,4 +60,34 @@ public class CuentaController {
         cuentaService.crearCuenta(cuenta);
         return ResponseEntity.status(HttpStatus.CREATED).body("Cuenta creada al cliente " + request.getCliente() + " con éxito");
     }
+
+    @PutMapping("/{numeroCuenta}")
+    public ResponseEntity<Cuenta> actualizarCuenta(@PathVariable Long numeroCuenta, @RequestBody Cuenta cuenta) {
+        Cuenta cuentaEncontrada = cuentaService.buscarPorNumero(numeroCuenta);
+        if (cuentaEncontrada == null) {
+            return ResponseEntity.notFound().build();
+        }
+        cuenta.setId(cuentaEncontrada.getId());
+        cuenta.setNumeroCuenta(cuenta.getNumeroCuenta());
+        cuenta.setNumeroCuenta(cuenta.getNumeroCuenta());
+        cuenta.setTipoCuenta(cuenta.getTipoCuenta());
+        cuenta.setEstado(cuenta.getEstado());
+        cuenta.setSaldo(cuenta.getSaldo());
+        cuenta.setCliente(cuentaEncontrada.getCliente());
+
+        Cuenta cuentaActualizada = cuentaService.actualizarCuenta(cuenta);
+        return ResponseEntity.ok(cuentaActualizada);
+    }
+
+    @DeleteMapping("/{numeroCuenta}")
+    public ResponseEntity<Cuenta> eliminarCuenta(@PathVariable Long numeroCuenta) {
+        Cuenta cuentaEncontrada = cuentaService.buscarPorNumero(numeroCuenta);
+        if (cuentaEncontrada == null) {
+            return ResponseEntity.notFound().build();
+        }
+        cuentaService.eliminarCuenta(cuentaEncontrada.getId());
+        return ResponseEntity.ok(cuentaEncontrada);
+    }
+
+    
 }

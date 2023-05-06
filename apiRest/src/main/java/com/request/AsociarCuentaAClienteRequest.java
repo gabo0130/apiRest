@@ -7,8 +7,8 @@ import lombok.*;
 @AllArgsConstructor
 public class AsociarCuentaAClienteRequest {
     private String cliente;
-    private int numeroCuenta;
+    private long numeroCuenta;
     private String tipoCuenta;
     private String estado;
-    private int saldo;
+    private long saldo;
 }
